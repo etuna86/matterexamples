@@ -1,6 +1,7 @@
 // module aliases
 var Engine = Matter.Engine,
     Render = Matter.Render,
+    Body = Matter.Body,
     World = Matter.World,
     Bodies = Matter.Bodies;
 
@@ -42,14 +43,21 @@ if(event.keyCode==13){
 
 document.addEventListener('keydown', (event) => {
     if(event.key=="ArrowUp"){
-        console.warn("racket", racket.position.y);
-        racket.position.y+= 1;
+        console.warn("racket", racket);
+        console.warn("World", World);
+        Body.translate( racket, {x:0, y:-10});
     }
     else if(event.key=="ArrowDown"){
-        racket.position.y+= - 1;
+        Body.translate( racket, {x:0, y:10});
         console.warn("racket", racket.position.y);
     }
-    
+    else if(event.key=="Enter"){
+        Body.rotate( racket, Math.PI/6);
+        setTimeout(function(){
+            Body.rotate( racket, -( Math.PI/6));
+        },100)
+        
+    }
     
 });
 
